@@ -14,11 +14,21 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log('new user connected');
 
+    socket.emit('newMessage', {
+        from: 'mike@example.com',
+        text: 'hey guys',
+        createdAt: 123
+    });
+
+    socket.on('createMessage', (newMessage) => {
+        console.log('createMessage', newMessage);
+    });
+
     socket.on('disconnect', () => {
         console.log('dissconnected from backend');
     });
 });
 
 server.listen(PORT, () => {
-    console.log(`Server is up on ${PORT} 3000`);
+    console.log(`Server is up on ${PORT}`);
 });
