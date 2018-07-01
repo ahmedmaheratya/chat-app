@@ -12,3 +12,15 @@ describe('generateMessage', () => {
         expect(message).toInclude({from,text});
     });
 });
+
+describe('generateLocationMessage', () => {
+    it('should generate the correct location message object', () => {
+        var from = 'Admin',
+        var lat = 1;
+        var lng = 1;
+        var message = generateLocationMessage(from, lat, lng);
+
+        expect(typeof message.createdAt).toBe('number');
+        expect(message).toBe('https://www.google.com/maps?q=1,1');
+    });
+});
